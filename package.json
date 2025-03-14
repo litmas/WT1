@@ -1,0 +1,39 @@
+{
+  "name": "example-restful-tasks",
+  "version": "3.0.0",
+  "description": "1DV026 - Example - RESTful Tasks",
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=20.6.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon --inspect --env-file=.env src/server.js",
+    "lint": "npx eslint ./src",
+    "lint:fix": "npx eslint ./src --fix"
+  },
+  "contributors": [
+    "Kelvin Wallace kw222sw@student.lnu.se"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@lnu/json-js-cycle": "^2.0.5",
+    "axios": "^1.8.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.22.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.31.0",
+    "nodemon": "^3.0.3"
+  }
+}

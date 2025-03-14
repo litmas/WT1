@@ -1,0 +1,126 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #121212;
+  color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: #f5f5f5;
+}
+
+h1 {
+  text-align: center;
+  color: #ffffff;
+}
+
+#auth-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.btn {
+  padding: 12px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: white;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #27ae60, #1e8449);
+  transform: translateY(-2px);
+}
+
+#logout-btn {
+  display: none;
+  background: linear-gradient(135deg, #2ecc71, #1e8449);
+}
+
+#logout-btn:hover {
+  background: linear-gradient(135deg, #1e8449, #145a32);
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.section h2 {
+  cursor: pointer;
+  padding: 12px;
+  background: #333;
+  color: white;
+  border-radius: 6px;
+  margin: 0;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+.section h2:hover {
+  background: #444;
+}
+
+.content {
+  display: none;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+#user-info {
+  text-align: center;
+}
+
+#user-info img {
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  border: 3px solid #2ecc71;
+}
+
+img:not([src]), 
+img[src=""] {
+  display: none;
+}
+
+#activities div,
+#groups div {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px;
+}
+
+#activities img,
+#groups img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+  border: 2px solid #2ecc71;
+}
+
+#groups a {
+  font-weight: bold;
+  color: #2ecc71;
+}
+
+#groups small {
+  display: block;
+  margin-top: 5px;
+  color: #bfbfbf;
+}
