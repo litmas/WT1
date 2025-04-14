@@ -13,34 +13,29 @@ export const home = async (req, res) => {
   const { accessToken } = req.user;
 
   try {
-    /**
-     * Represents the response object returned by the GET request
-     *  to retrieve activity events from 'https://gitlab.lnu.se/api/v4/events'.
-     * This object contains information about activities fetched
-     *  based on the provided access token and query parameters.
-     * @typedef {object} activitiesResponse
-     */
-    const activitiesResponse = await axios.get('https://gitlab.lnu.se/api/v4/events', {
+    // First request: get 100 events (max per_page)
+    const firstPageResponse = await axios.get('https://gitlab.lnu.se/api/v4/events', {
       headers: { Authorization: `Bearer ${accessToken}` },
-      params: { per_page: 102 },
+      params: { per_page: 100 },
     });
 
-    /**
-     * Represents the response object containing information
-     *  about groups fetched from the specified URL.
-     * The data is retrieved using the axios library with a GET request.
-     *
-     * @type {Promise<AxiosResponse<any>>}
-     */
+    // Second request: get 1 more event (using page=2 to get the next set)
+    const secondPageResponse = await axios.get('https://gitlab.lnu.se/api/v4/events', {
+      headers: { Authorization: `Bearer ${accessToken}` },
+      params: { per_page: 1, page: 2 },
+    });
+
+    // Combine the results from both requests
+    const combinedActivities = [
+      ...firstPageResponse.data,
+      ...secondPageResponse.data,
+    ];
+
     const groupsResponse = await axios.get('https://gitlab.lnu.se/api/v4/groups', {
       headers: { Authorization: `Bearer ${accessToken}` },
       params: { per_page: 3 },
     });
 
-    /**
-     * Represents a list of group objects acquired from a response.
-     * @type {Array<object>}
-     */
     const groups = groupsResponse.data;
     const groupsWithProjects = await Promise.all(groups.map(async (group) => {
       const projectsResponse = await axios.get(`https://gitlab.lnu.se/api/v4/groups/${group.id}/projects`, {
@@ -48,13 +43,8 @@ export const home = async (req, res) => {
         params: { per_page: 5 },
       });
 
-      /**
-       * Represents a list of projects retrieved from the response data.
-       * @type {Array}
-       */
       const projects = projectsResponse.data;
       const projectsWithCommits = await Promise.all(projects.map(async (project) => {
-        // eslint-disable-next-line max-len
         const commitsResponse = await axios.get(`https://gitlab.lnu.se/api/v4/projects/${project.id}/repository/commits`, {
           headers: { Authorization: `Bearer ${accessToken}` },
           params: { per_page: 1 },
@@ -74,7 +64,7 @@ export const home = async (req, res) => {
 
     res.json({
       user: req.user.user,
-      activities: activitiesResponse.data,
+      activities: combinedActivities,
       groups: groupsWithProjects,
     });
   } catch (error) {
@@ -82,12 +72,6 @@ export const home = async (req, res) => {
   }
 };
 
-/**
- * Logs the user out by removing the token from local storage and redirecting to the home page.
- *
- * @param {object} req - The request object.
- * @param {object} res - The response object.
- */
 export const logout = (req, res) => {
   res.send(
     `<html>
