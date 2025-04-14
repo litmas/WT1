@@ -22,7 +22,7 @@ export const home = async (req, res) => {
      */
     const activitiesResponse = await axios.get('https://gitlab.lnu.se/api/v4/events', {
       headers: { Authorization: `Bearer ${accessToken}` },
-      params: { per_page: 101 },
+      params: { per_page: 102 },
     });
 
     /**
