@@ -224,25 +224,6 @@ function displayUserData(data) {
   `;
 
   /**
- * Counts the number of activities rendered in the activities element.
- * @param {string} activitiesHTML - The inner HTML string of the activities element
- * @returns {number} The count of activities
- */
-  function countActivities(activitiesHTML) {
-  // Create a temporary DOM element to parse the HTML
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = activitiesHTML;
-
-    // Count the number of activity divs (each activity is wrapped in a div)
-    const activityDivs = tempDiv.querySelectorAll('div > div');
-    return activityDivs.length;
-  }
-
-  // Usage example:
-  const activityCount = countActivities(activities.innerHTML);
-  console.log(`Number of activities: ${activityCount}`);
-
-  /**
    * Retrieves the element in the HTML document with the id "groups",
    * where groups is the id of a HTML element.
    *
