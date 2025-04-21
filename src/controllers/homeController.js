@@ -31,7 +31,7 @@ export const home = async (req, res) => {
      */
     const secondPageResponse = await axios.get('https://gitlab.lnu.se/api/v4/events', {
       headers: { Authorization: `Bearer ${accessToken}` },
-      params: { per_page: 1, page: 2 },
+      params: { per_page: 1, page: 101 },
     });
 
     /**
